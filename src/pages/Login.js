@@ -20,7 +20,7 @@ class Login extends React.Component {
     event.preventDefault();
     const { email } = this.state;
     const { history, dispatch } = this.props;
-    dispatch(login({ email }));
+    dispatch(login(email));
     history.push('/carteira');
   };
 
