@@ -1,5 +1,8 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { REQUEST } from '../../types/request';
+
+const REQUEST = 'REQUEST';
+const CURRENCY = 'CURRENCY';
+const EXPENSES = 'EXPENSES';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -13,11 +16,18 @@ const wallet = (state = INITIAL_STATE, action) => {
   case REQUEST: return {
     ...state,
   };
-  case 'CURRENCY':
+  case CURRENCY:
     return {
       ...state,
       currencies: action.payload,
     };
+  case EXPENSES: return {
+    ...state,
+    expenses: [...state.expenses, {
+      id: state.expenses.length,
+      ...action.payload,
+    }],
+  };
   default:
     return state;
   }

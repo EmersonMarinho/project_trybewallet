@@ -1,6 +1,8 @@
 // Coloque aqui suas actions
-import { REQUEST } from '../../types/request';
-import { LOGIN } from '../../types/user';
+const LOGIN = 'LOGIN';
+const REQUEST = 'REQUEST';
+const CURRENCY = 'CURRENCY';
+const EXPENSES = 'EXPENSES';
 
 export const login = (payload) => ({
   type: LOGIN,
@@ -8,7 +10,7 @@ export const login = (payload) => ({
 });
 
 export const currency = (payload) => ({
-  type: 'CURRENCY',
+  type: CURRENCY,
   payload,
 });
 
@@ -16,11 +18,27 @@ export const request = () => ({
   type: REQUEST,
 });
 
+export const expense = (payload) => ({
+  type: EXPENSES,
+  payload,
+
+});
+
 export const fetchAction = () => async (dispatch) => {
   dispatch(request());
   const response = await fetch('https://economia.awesomeapi.com.br/json/all');
   const data = await response.json();
   const arrayCurrencies = Object.keys(data).filter((item) => item !== 'USDT');
-  console.log(arrayCurrencies);
   return dispatch(currency(arrayCurrencies));
+};
+
+export const expenseAction = (localState) => async (dispatch) => {
+  try {
+    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const data = await response.json();
+    const expenseWithExchangeRates = { ...localState, exchangeRates: data };
+    dispatch(expense(expenseWithExchangeRates));
+  } catch (error) {
+    console.log(error);
+  }
 };
