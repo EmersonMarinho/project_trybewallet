@@ -3,6 +3,7 @@ const LOGIN = 'LOGIN';
 const REQUEST = 'REQUEST';
 const CURRENCY = 'CURRENCY';
 const EXPENSES = 'EXPENSES';
+const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const login = (payload) => ({
   type: LOGIN,
@@ -22,6 +23,11 @@ export const expense = (payload) => ({
   type: EXPENSES,
   payload,
 
+});
+
+export const deleteExpense = (payload) => ({
+  type: DELETE_EXPENSE,
+  payload,
 });
 
 export const fetchAction = () => async (dispatch) => {

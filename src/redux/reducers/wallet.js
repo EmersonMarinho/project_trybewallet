@@ -3,6 +3,7 @@
 const REQUEST = 'REQUEST';
 const CURRENCY = 'CURRENCY';
 const EXPENSES = 'EXPENSES';
+const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -27,6 +28,10 @@ const wallet = (state = INITIAL_STATE, action) => {
       id: state.expenses.length,
       ...action.payload,
     }],
+  };
+  case DELETE_EXPENSE: return {
+    ...state,
+    expenses: state.expenses.filter((expense) => expense.id !== action.payload),
   };
   default:
     return state;
