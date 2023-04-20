@@ -4,6 +4,8 @@ const REQUEST = 'REQUEST';
 const CURRENCY = 'CURRENCY';
 const EXPENSES = 'EXPENSES';
 const DELETE_EXPENSE = 'DELETE_EXPENSE';
+const EDIT_EXPENSE = 'EDIT_EXPENSE';
+const EDIT_FINISH = 'EDIT_FINISH';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -33,6 +35,19 @@ const wallet = (state = INITIAL_STATE, action) => {
     ...state,
     expenses: state.expenses.filter((expense) => expense.id !== action.payload),
   };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      editor: true,
+      idToEdit: action.payload,
+    };
+  case EDIT_FINISH:
+    return {
+      ...state,
+      editor: false,
+      expenses: [...action.payload],
+      idToEdit: 0,
+    };
   default:
     return state;
   }

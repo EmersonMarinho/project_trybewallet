@@ -4,6 +4,8 @@ const REQUEST = 'REQUEST';
 const CURRENCY = 'CURRENCY';
 const EXPENSES = 'EXPENSES';
 const DELETE_EXPENSE = 'DELETE_EXPENSE';
+const EDIT_EXPENSE = 'EDIT_EXPENSE';
+const EDIT_FINISH = 'EDIT_FINISH';
 
 export const login = (payload) => ({
   type: LOGIN,
@@ -27,6 +29,16 @@ export const expense = (payload) => ({
 
 export const deleteExpense = (payload) => ({
   type: DELETE_EXPENSE,
+  payload,
+});
+
+export const editExpense = (payload) => ({
+  type: EDIT_EXPENSE,
+  payload,
+});
+
+export const editFinishAction = (payload) => ({
+  type: EDIT_FINISH,
   payload,
 });
 
